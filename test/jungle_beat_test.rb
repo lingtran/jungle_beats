@@ -21,7 +21,7 @@ class JungleBeatTest < Minitest::Test
 #     assert_equal nil, jb.beat.head.data
 #   end
 
-  def test_can_append_jungle_beats
+  def test_can_add_elements_to_end_of_list
     jb = JungleBeat.new("too legit to quit")
 
     assert_equal "too", jb.beats.head.data
@@ -33,8 +33,26 @@ class JungleBeatTest < Minitest::Test
     refute_equal "girl", jb.beats.tail.data
     assert_equal "world", jb.beats.tail.data
     refute_equal "i", jb.beats.head.data
-    assert_equal "too", jb.beats.head.data 
+    assert_equal "too", jb.beats.head.data
+  end
 
+  def test_elements_can_be_added_to_beginning_of_list
+    jb = JungleBeat.new("too legit to quit")
+
+    assert_equal "too", jb.beats.head.data
+    jb.prepend("you say what")
+    assert_equal "you", jb.beats.head.data
+    assert_equal "say", jb.beats.head.link.data
+    assert_equal "too", jb.beats.head.link.link.link.data
+
+  end
+
+  def test_can_insert_elements_to_the_position_through_a_given_integer
+    skip
+    jb = JungleBeat.new("too legit to quit")
+
+    jb.insert(2, "for person")
+    assert_equal "too legit for person to quit", jb # takes the place of the word in the third position
   end
 
   def test_can_play

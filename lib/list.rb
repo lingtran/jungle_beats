@@ -2,9 +2,9 @@ require_relative 'node'
 require 'pry'
 
 class List
-  attr_accessor :head
+  attr_accessor :head, :position
   # want to be able to create a list that will be consisted of nodes
-  def initialize(data)
+  def initialize(data=nil)
     @head = Node.new(data)
   end
 
@@ -37,13 +37,22 @@ class List
     @head = new_node
   end
 
-# #LinkedList#insert: insert one or more elements at an arbitrary position in the list
-  # def insert(integer, value)
-  #   # start at head, which is position 0. each node's position in the list will be anchored to the head's position. or, if counting from backwards from the tail, then it is -1.
-  #   # given a position number, have to find current node in given positon number so that it can be replaced by new node
-  #   # in order for replacement to occur, the node prior to current node (preceding node) will have its link changed to the new node, the current node will be made the link of the new node
-  # end
-  #
+# Index method for #insert: insert one or more elements at an arbitrary position in the list
+  def count
+  # each node needs to be assigned an index (number) to reflect its position in the list
+  # know that to start (i.e., the head) has an index of 0. ensuing nodes will have increasing distance from the head node through increments of one between subsequent nodes
+  # the tail will
+    @positions = []
+    current_node = @head
+    until current_node.link.nil?
+      if @head.link == true
+        @position.shift(current_node)
+      else
+        0
+      end
+    end
+    @positions.count
+  end
 
   # def all
   #   # show all the data contained in the nodes, from head node to tail node
@@ -63,5 +72,4 @@ class List
   # LinkedList#count: return number of elements in the list in the list
 
   # LinkedList#find(position, number of elements to show starting from given position)
-
 end

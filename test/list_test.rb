@@ -59,10 +59,12 @@ class ListTest < Minitest::Test
   end
 
 
-  def test_can_insert
+  def test_can_assign_index_to_nodes
     skip
-    list = List.new("Girls")
+    list = List.new("too")
 
+    list.append("legit")
+    assert_equal 0, list.index("too")
     # > jb.insert(4, "boop bop bop boop")
   end
 
@@ -83,8 +85,13 @@ class ListTest < Minitest::Test
     # > jb.pop(4)
   end
 
-  def test_can_count
-    skip
+  def test_can_count_node
+    list = List.new("too legit")
+
+    list.append("to quit")
+    list.count
+    assert_equal 1, list.count
+
     # > jb.count
   end
 end
