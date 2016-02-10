@@ -1,30 +1,38 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require '../lib/list'
+require 'pry'
 
 class ListTest < Minitest::Test
   def test_list_can_hold_data
-    list = List.new("sunshine")
+    list = List.new("too legit to quit")
 
     assert list.head.is_a?(Node)
-    assert_equal "sunshine", list.head.data
+    assert_equal "too legit to quit", list.head.data
 
-#     # Consider something like this:
-#     def test_a_linked_list_holds_data
-#     list = LinkedList.new("pizza")
-# ​
-#     assert list.head.is_a?(Node)
-#     assert "pizza", list.head.data
-#     end
     # > jb = JungleBeat.new("deep dep dep deep")
   end
 
+  def test_can_find_the_tail
+    list = List.new("too legit to quit")
+    # list = List.new
+    assert_equal nil, list.tail.link
+    list.append("Who run the world? Girls.")
+    assert_equal "Who run the world? Girls.", list.tail.data
+    # > jb.find(8, 2)
+  end
+
   def test_can_append
-    list = List.new("sunflower")
-    assert_equal "sunflower", list.tail.data
-    list.append("solar power")
-    list.append("green power")
-    assert_equal "green power", list.tail.data
+    list = List.new("too")
+    assert_equal "too", list.tail.data
+    list.append("legit")
+    assert_equal "too", list.head.data
+    assert_equal "legit", list.head.link.data
+    list.append("to")
+    assert_equal "to", list.head.link.link.data
+    list.append("quit")
+    assert_equal "quit", list.tail.data
+    assert_equal "quit", list.head.link.link.link.data
 
     # new list
     # find tail
@@ -32,57 +40,52 @@ class ListTest < Minitest::Test
     # verify new tail is what was appended
 
     # > jb.append("deep bop bop deep")
-    # => 4
   end
 
-  def test_can_find_the_tail
-    list = List.new("sunshine")
-    # list = List.new
-    assert_equal nil, list.tail.link
-    assert_equal "sunshine", list.tail.data
-    # > jb.find(8, 2)
-    # => "deep dep"
+  def test_can_prepend
+    # list = List.new("Girls")
+    list = List.new("Girls")
+
+    assert_equal "Girls", list.head.data
+    list.prepend("world?")
+    assert_equal "world?", list.head.data
+    assert_equal "Girls", list.head.link.data
+    list.prepend("the")
+    list.prepend("run")
+    list.prepend("Who")
+    assert_equal "Who", list.head.data
+
+    # > jb.prepend("tee tee tee tee")
+  end
+
+  def test_can_disclose_all_nodes_in_the_list
+    skip
+    
+    # > jb.all
   end
 
   def test_can_play
     skip
     # > jb.play
-    # => 4 # also plays the sounds
-  end
-
-  def test_can_all
-    skip
-    # > jb.all
-    # => "deep dep dep deep deep bop bop deep"
-  end
-
-  def test_can_prepend
-    skip
-    # > jb.prepend("tee tee tee tee")
-    # => 4 # number of beats inserted
   end
 
   def test_can_include?
     skip
     # > jb.include?("dep")
-    # => true
   end
 
   def test_can_pop
     skip
     # > jb.pop(4)
-    # => "deep bop bop deep"
   end
 
   def test_can_count
     skip
     # > jb.count
-    # => 8
   end
 
   def test_can_insert
     skip
     # > jb.insert(4, "boop bop bop boop")
-    # => "tee tee tee tee boop bop bop boop deep dep dep deep"
   end
 end
