@@ -58,16 +58,20 @@ class ListTest < Minitest::Test
     # > jb.prepend("tee tee tee tee")
   end
 
+
+  def test_can_insert
+    skip
+    list = List.new("Girls")
+
+    # > jb.insert(4, "boop bop bop boop")
+  end
+
   def test_can_disclose_all_nodes_in_the_list
     skip
-    
+
     # > jb.all
   end
 
-  def test_can_play
-    skip
-    # > jb.play
-  end
 
   def test_can_include?
     skip
@@ -82,10 +86,5 @@ class ListTest < Minitest::Test
   def test_can_count
     skip
     # > jb.count
-  end
-
-  def test_can_insert
-    skip
-    # > jb.insert(4, "boop bop bop boop")
   end
 end

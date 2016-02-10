@@ -1,21 +1,34 @@
 require_relative 'list'
 require_relative 'node'
 
-require 'pry'
-
 class JungleBeat
+  attr_accessor :beats
 
-  # when a JungleBeat is created, it takes in a string that is really consisted of a collection of nodes
-  # Requires list class, so can break up nodes and instantiate individual nodes
-  # Store the elements somewhere
+  def initialize(beats = nil)
+    @beats = chopper(beats)
+  end
 
-  def initialize(beats)
-    @beats = List.new(beats)
+  def chopper(beats)
+    beats_array = beats.split
+    list = List.new(beats_array[0])
+    if beats_array[1]
+      beats_array[1..-1].each do |beat|
+        list.append(beat)
+      end
+    end
+    list
   end
 
   def append(beats)
-    list = @beat.split(/ /) # this gives back a collection 
-    list.count
+    current_list = @beats
+    beats_array = beats.split
+    new_list = List.new(beats_array[0])
+    if beats_array[1]
+      beats_array[1..-1].each do |beat|
+        new_list.append(beat)
+      end
+    end
+    current_list.tail.link = new_list.head
   end
 
 end

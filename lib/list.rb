@@ -37,10 +37,19 @@ class List
     @head = new_node
   end
 
-  def all
-    # show all the data contained in the nodes, from head node to tail node
+# #LinkedList#insert: insert one or more elements at an arbitrary position in the list
+  # def insert(integer, value)
+  #   # start at head, which is position 0. each node's position in the list will be anchored to the head's position. or, if counting from backwards from the tail, then it is -1.
+  #   # given a position number, have to find current node in given positon number so that it can be replaced by new node
+  #   # in order for replacement to occur, the node prior to current node (preceding node) will have its link changed to the new node, the current node will be made the link of the new node
+  # end
+  #
 
-  end
+  # def all
+  #   # show all the data contained in the nodes, from head node to tail node
+  #
+  # end
+
   # LinkedList#play: play the sounds of elements 9
 
   # LinkedList#append: append and return the value for how many have been appended
