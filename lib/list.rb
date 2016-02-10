@@ -31,10 +31,11 @@ class List
   # LinkedList#prepend: insert elements and return number of elements inserted
   def prepend(value)
     # find the head node
+    current_node = @head
     new_node = Node.new(value)
     # new_node's link has to be the head
-    new_node.link = @head
     @head = new_node
+    @head.link = current_node
   end
 
 # Index method for #insert: insert one or more elements at an arbitrary position in the list
@@ -42,18 +43,33 @@ class List
   # each node needs to be assigned an index (number) to reflect its position in the list
   # know that to start (i.e., the head) has an index of 0. ensuing nodes will have increasing distance from the head node through increments of one between subsequent nodes
   # the tail will
-    @positions = []
     current_node = @head
+    counter = 1
     until current_node.link.nil?
-      if @head.link == true
-        @position.shift(current_node)
-      else
-        0
-      end
+      counter += 1
+      current_node = current_node.link
     end
-    @positions.count
+    counter
   end
 
+def insert(integer, beats)
+  counter = 0
+  current_node = @head
+  new_node = Node.new(beats)
+  until counter == integer
+    counter += 1
+    current_node = current.node.link
+  end
+  new_node.link = current_node
+
+  counter = 0
+  current_node = @head
+  until counter == (integer - 1)
+    counter += 1
+    current_node = current.node.link
+  end
+  current_node.link = new_node
+end
   # def all
   #   # show all the data contained in the nodes, from head node to tail node
   #
