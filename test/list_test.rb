@@ -79,7 +79,12 @@ class ListTest < Minitest::Test
   end
 
   def test_next_node
-    skip
+    list = List.new("too legit to quit")
+
+    list.append("everybody")
+    assert_equal list.head.link, list.next_node(1)
+    list.append("somebody")
+    assert_equal list.head.link.link, list.next_node(2)
   end
 
 end

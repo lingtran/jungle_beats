@@ -76,12 +76,16 @@ class JungleBeat
 
   def find(index, number_of_beats)
     # Need to handle cases where number_of_beats includes possibility of going beyond tail, in which case no return value
+    beats = number_of_beats -= 1
+    position = index += beats
+
     findings = ""
-    (index).upto(index + 1) { |num|
+    (index).upto(position) { |num|
       findings << list.next_node(num).data + " "
     }
     findings.rstrip
 
+    # may write following as embedded method
     # Issue with determining range so that number passed in reflects desired index up to number_of_beats
     # iterate (number_of_beats) starting from given index
     # first index to retrive is index given
