@@ -34,7 +34,6 @@ class ListTest < Minitest::Test
   end
 
   def test_can_prepend
-    # list = List.new("Girls")
     list = List.new("Girls")
 
     assert_equal "Girls", list.head.data
@@ -56,7 +55,6 @@ class ListTest < Minitest::Test
     list.append("to")
     list.append("quit")
     assert_equal 4, list.count
-
   end
 
   def test_can_insert_beat
@@ -78,7 +76,6 @@ class ListTest < Minitest::Test
     assert_equal list.head, list.preceding_node(1)
     list.prepend("get this all")
     assert_equal list.head.link, list.preceding_node(2)
-
   end
 
   def test_next_node
