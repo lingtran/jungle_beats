@@ -8,9 +8,8 @@ class ListTest < Minitest::Test
     list = List.new("too legit to quit")
 
     assert list.head.is_a?(Node)
+    assert list.is_a?(List)
     assert_equal "too legit to quit", list.head.data
-
-    # > jb = JungleBeat.new("deep dep dep deep")
   end
 
   def test_can_find_the_tail
@@ -19,7 +18,6 @@ class ListTest < Minitest::Test
     assert_equal nil, list.tail.link
     list.append("Who run the world? Girls.")
     assert_equal "Who run the world? Girls.", list.tail.data
-    # > jb.find(8, 2)
   end
 
   def test_can_append
@@ -33,13 +31,6 @@ class ListTest < Minitest::Test
     list.append("quit")
     assert_equal "quit", list.tail.data
     assert_equal "quit", list.head.link.link.link.data
-
-    # new list
-    # find tail
-    # append new node
-    # verify new tail is what was appended
-
-    # > jb.append("deep bop bop deep")
   end
 
   def test_can_prepend
@@ -54,44 +45,44 @@ class ListTest < Minitest::Test
     list.prepend("run")
     list.prepend("Who")
     assert_equal "Who", list.head.data
-
-    # > jb.prepend("tee tee tee tee")
   end
 
-
-  def test_can_assign_index_to_nodes
-    skip
+  def test_can_count
     list = List.new("too")
 
     list.append("legit")
-    assert_equal 0, list.index("too")
-    # > jb.insert(4, "boop bop bop boop")
+    assert_equal 2, list.count
+
+    list.append("to")
+    list.append("quit")
+    assert_equal 4, list.count
+
   end
 
-  def test_can_disclose_all_nodes_in_the_list
+  def test_can_insert_beat
+    list = List.new("too")
+
+    list.insert(1, "legit")
+    assert_equal "too", list.head.data
+    assert_equal "legit", list.head.link.data
+    list.insert(1, "very")
+    assert_equal "very", list.head.link.data
+    list.insert(2, "wtf")
+    assert_equal "wtf", list.head.link.link.data
+  end
+
+  def test_preceding_node
+    list = List.new("too legit to quit")
+
+    list.append("for real")
+    assert_equal list.head, list.preceding_node(1)
+    list.prepend("get this all")
+    assert_equal list.head.link, list.preceding_node(2)
+
+  end
+
+  def test_next_node
     skip
-
-    # > jb.all
   end
 
-
-  def test_can_include?
-    skip
-    # > jb.include?("dep")
-  end
-
-  def test_can_pop
-    skip
-    # > jb.pop(4)
-  end
-
-  def test_can_count_node
-    list = List.new("too legit")
-
-    list.append("to quit")
-    list.count
-    assert_equal 1, list.count
-
-    # > jb.count
-  end
 end

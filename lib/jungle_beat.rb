@@ -1,5 +1,6 @@
 require_relative 'list'
 require_relative 'node'
+require 'pry'
 
 class JungleBeat
   attr_accessor :beats, :list
@@ -16,51 +17,74 @@ class JungleBeat
         list.append(beat)
       end
     end
+    list
   end
 
   def append(beats)
-    beats_array = beats.split
-    current_head = list.head
-    if beats_array[0]
-      beats_array[0..-1].each do |beat|
-        list.append(beat)
-      end
-      list.tail.link = List.new(beats_array[0]).head
+    beats.split.each do |beat|
+      list.append(beat)
     end
-    # need to point current list tail to new list's head
-    beats_array.size
+    beats.split.count
   end
 
-  def prepend(beats) #NEED HELP
-    beats_array = beats.split
-    new_list = List.new[beats_array[0]]
-    if beats_array[0]
-      beats_array[1..-1].each do |beat|
-        new_list.prepend(beat)
-      end
+  def prepend(beats)
+    beats.split.reverse.each do |beat|
+      list.prepend(beat)
     end
-    new_list
-    new_list.tail.link = @beats.head
-    beats_array.size
+    beats.split.count
   end
 
-  # def count
-  #   @positions = []
-  #   until @beats.link.nil?
-  #     if @beats.head
-  #       @positions.push(@beats)
-  # end
+  def insert(integer, beats)
+    beats.split.reverse.each do |beat|
+      list.insert(integer, beat)
+    end
+  end
 
-  # def insert(integer, beats)
-  #   # the number of times to iterate through the linked list is the same integer number given as argument, starting from head, which is zero
-  #   # once hit the number time hits, the preceding node will be linked to the new node, and then new node will be linked to the node returned at the integer-th moment
-  #   # this requires going through current_list and then linking to new phantom list
-  #   counter = 0
-  #   current_node.
-  #
-  #   current_list.NODE PRECEDING INTEGER-TH (MINUS ONE) POSITION.link = new_list.head
-  #   new_list.tail.link = current_list.NODE AT INTEGER-TH POSITION.
-  #
-  # end
+  def include?(beat)
+    answer = false
+    current_node = list.head
+    until current_node.link.nil?
+      if beat == current_node.data
+        return true
+        break
+      else
+        return false
+      end
+     current_node = current_node.link
+    end
+    answer
+  end
 
+  def pop(integer = 1)
+    old_tail = ""
+    integer.times do
+      old_tail.prepend(list.tail.data + " ")
+      list.preceding_node(list.count - 1).link = nil
+    end
+    old_tail.strip
+  end
+
+  def count
+    list.count
+  end
+
+  def find(index, number_of_beats)
+    findings = ""
+    number_of_beats.times do
+      binding.pry
+      findings.prepend(list.current_node(index + 1).data + " ")
+      binding.pry
+    end
+    binding.pry
+    findings.strip
+  end
+
+  def all
+    all = ""
+    list.count.times do
+      all.prepend(list.tail.data + " ")
+      pop
+    end
+    all
+  end
 end
