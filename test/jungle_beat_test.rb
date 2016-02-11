@@ -39,7 +39,6 @@ class JungleBeatTest < Minitest::Test
     assert_equal "too legit they are to quit", jb.insert(2, "they are")
     assert_equal "too legit they are and others to quit", jb.insert(4, "and others")
     refute_equal "too legit they are or friends and other are to quit", jb.insert(5, "or friends")
-
   end
 
   def test_can_verify_if_beat_is_included
@@ -92,6 +91,5 @@ class JungleBeatTest < Minitest::Test
     assert_equal 20, jb.play
     jb.append("somewhere over the rainbow beep boop beep way up high")
     assert_equal 30, jb.play
-
   end
 end
