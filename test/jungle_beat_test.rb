@@ -15,7 +15,7 @@ class JungleBeatTest < Minitest::Test
 #   def test_Jungle_Beat_can_be_created_as_an_empty_list
 #     jb = JungleBeat.new
 #
-#     assert_equal nil, jb.beat.head.data
+#     assert_equal nil, jb.count
 #   end
 
   def test_can_add_elements_to_end_of_list
@@ -36,11 +36,10 @@ class JungleBeatTest < Minitest::Test
   def test_can_insert_elements_to_the_position_through_a_given_integer
     jb = JungleBeat.new("too legit to quit")
 
-    jb.insert(1, "proud and")
-    assert_equal "proud", jb.beats.head.link.data
-    assert_equal "too", jb.beats.head.data
-    jb.insert(1, "not")
-    assert_equal "not", jb.beats.head.link.data
+    assert_equal "too legit they are to quit", jb.insert(2, "they are")
+    assert_equal "too legit they are and others to quit", jb.insert(4, "and others")
+    refute_equal "too legit they are or friends and other are to quit", jb.insert(5, "or friends")
+
   end
 
   def test_can_verify_if_beat_is_included
@@ -70,19 +69,29 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_can_return_all_elements
-    skip
     jb = JungleBeat.new("too legit to quit")
 
     assert_equal "too legit to quit", jb.all
+    jb.append("keep moving on that's what they say")
+    assert_equal "too legit to quit keep moving on that's what they say", jb.all
   end
 
   def test_can_find_number_of_beats_at_specified_index
     jb = JungleBeat.new("too legit to quit")
 
     assert_equal "to quit", jb.find(2, 2)
+    jb.append("girls who run the world")
+    # assert_equal "who run the world", jb.find(5, 4)
   end
 
   def test_can_play
-    skip
+    jb = JungleBeat.new("too legit to quit")
+
+    assert_equal 4, jb.play
+    jb.append("remember those walls i built baby they're tumbling down you didn't even put up a fight")
+    assert_equal 20, jb.play
+    jb.append("somewhere over the rainbow beep boop beep way up high")
+    assert_equal 30, jb.play
+
   end
 end

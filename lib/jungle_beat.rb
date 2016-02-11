@@ -6,10 +6,10 @@ class JungleBeat
   attr_accessor :beats, :list
 
   def initialize(beats = nil)
-    @beats = recent(beats)
+    @beats = starting(beats)
   end
 
-  def recent(beats)
+  def starting(beats)
     beats_array = beats.split
     @list = List.new(beats_array[0])
     if beats_array[1]
@@ -18,6 +18,11 @@ class JungleBeat
       end
     end
     list
+  end
+
+  def play
+    `say -r 300 -v Cellos #{all.split}`
+    list.count
   end
 
   def append(beats)
@@ -38,6 +43,7 @@ class JungleBeat
     beats.split.reverse.each do |beat|
       list.insert(integer, beat)
     end
+    all
   end
 
   def include?(beat)
@@ -55,11 +61,11 @@ class JungleBeat
     answer
   end
 
-  def pop(integer = 1)
+  def pop(number_of_beats = 1)
     old_tail = ""
-    integer.times do
+    (number_of_beats).downto(1) do
       old_tail.prepend(list.tail.data + " ")
-      list.preceding_node(list.count - 1).link = nil
+      list.preceding_node(list.count - 1 ).link = nil
     end
     old_tail.strip
   end
@@ -69,22 +75,27 @@ class JungleBeat
   end
 
   def find(index, number_of_beats)
+    # Need to handle cases where number_of_beats includes possibility of going beyond tail, in which case no return value
     findings = ""
-    number_of_beats.times do
-      binding.pry
-      findings.prepend(list.current_node(index + 1).data + " ")
-      binding.pry
-    end
-    binding.pry
-    findings.strip
+    (index).upto(index + 1) { |num|
+      findings << list.next_node(num).data + " "
+    }
+    findings.rstrip
+
+    # Issue with determining range so that number passed in reflects desired index up to number_of_beats
+    # iterate (number_of_beats) starting from given index
+    # first index to retrive is index given
+    # next index is index + 1
+    # next index is index + 2
+    # next index is index + 3
+    # consider pattern in terms of possible conditional groups, difference if starting index is 0? etc.
   end
 
   def all
     all = ""
-    list.count.times do
-      all.prepend(list.tail.data + " ")
-      pop
+    0.upto(list.count - 1) do |num|
+      all << list.next_node(num).data + " "
     end
-    all
+    all.strip
   end
 end

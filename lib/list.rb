@@ -37,11 +37,11 @@ class List
 
   def insert(index, beats)
     new_node = Node.new(beats)
-    new_node.link = current_node(index)
+    new_node.link = next_node(index)
     preceding_node(index).link = new_node
   end
 
-  def current_node(index)
+  def next_node(index)
     counter = 0
     current_node = @head
     until counter == index
@@ -52,6 +52,6 @@ class List
   end
 
   def preceding_node(index)
-    current_node(index - 1)
+    next_node(index - 1)
   end
 end
